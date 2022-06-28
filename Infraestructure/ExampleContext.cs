@@ -16,6 +16,7 @@ namespace Infraestructure
         }
 
         public DbSet<Person> People { get; set; }
+        public DbSet<Product> Products { get; set; }
 
     }
 }

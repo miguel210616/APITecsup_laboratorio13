@@ -13,5 +13,6 @@ namespace Domain
         public string LastName{ get; set; }
         public bool IsEnable { get; set; }
         public DateTime CreatedON { get; set; }
+
     }
 }
