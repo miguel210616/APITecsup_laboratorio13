@@ -29,6 +29,25 @@ namespace APITecsup_laboratorio13.Controllers
 
             return response;
         }
+
+        [HttpPost]
+        public ProductResponse GetById(int id)
+        {
+            var service = new ProductService();
+            var product = service.GetById(id);
+
+            var response = new ProductResponse
+            {
+                Nombre = product.Nombre,
+                Descripcion = product.Descripcion,
+                PrecioVenta = product.PrecioVenta,
+                FechaVencimiento = product.FechaVencimiento,
+                IGV = product.IGV
+            };
+
+            return response;
+        }
+
         [HttpPost]
         public bool Insert(ProductRequest request)
         {
@@ -50,5 +69,36 @@ namespace APITecsup_laboratorio13.Controllers
             }
             return response;
         }
+
+        [HttpPost]
+        public bool Update(int id, ProductRequest request)
+        {
+            var response = true;
+            try
+            {
+                var service = new ProductService();
+                service.Update(id, new Domain.Product
+                {
+                    Nombre = request.Nombre,
+                    Descripcion = request.Descripcion,
+                    PrecioVenta = request.PrecioVenta,
+                    FechaVencimiento = request.FechaVencimiento,
+                });
+            }
+            catch (Exception)
+            {
+                response = false;
+            }
+            return response;
+        }
+
+        [HttpPost]
+        public void Delete(int id)
+        {
+            var service = new ProductService();
+            service.Delete(id);
+
+        }
+
     }
 }

@@ -38,13 +38,26 @@ namespace Service
             }
         }
 
+        public void Update(int id, Product product)
+        {
+            using (var context = new ExampleContext())
+            {
+                var prod = context.Products.Find(id);
+                prod.Nombre = product.Nombre;
+                prod.Descripcion = product.Descripcion;
+                prod.PrecioVenta = product.PrecioVenta;
+                prod.FechaVencimiento = product.FechaVencimiento;
+                prod.IGV = product.PrecioVenta * 0.18;
+                context.SaveChanges();
+            }
+        }
+
         public void Delete(int id)
         {
             using (var context = new ExampleContext())
             {
                 var product = context.Products.Find(id);
                 product.EstaActivo = false;
-                context.Products.Add(product);
                 context.SaveChanges();
             }
         }
